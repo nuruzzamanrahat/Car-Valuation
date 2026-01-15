@@ -540,10 +540,10 @@
                 <div class="note">
                         <p><strong>Encl:</strong></p>
                         <ol style="padding-left: 20px;">
-                            <li>Annexure-I: Photograph of Property</li>
-                            <li>Annexure-II: Hand Sketch Map</li>
-                            <li>Annexure-III: Mouza Map</li>
-                            <li>Annexure-IV: Location on Google Map</li>
+                            <li>Annexure-I: Detail Report</li>
+                            <li>Annexure-II: Registration Acknowledgement Slip Verification Report</li>
+                            <li>Annexure-III: Photograph of Vehicle</li>
+                            <li>Annexure-IV: QR Code for Video of Vehicle</li>
                         </ol>
                 </div>
             </div>
@@ -1283,7 +1283,7 @@
                     <img src="AMK Header.png" class="report-header-img" alt="Header" crossorigin="anonymous">
                     <div class="sheet-content photo-page-content" id="photo-sheet-content-${i}">
                         <div class="annexure-header">
-                            ${i === 0 ? 'Annexure-I: Photograph of Property' : 'Annexure-I: Photograph of Property (Contd.)'}
+                            ${i === 0 ? 'Annexure-III: Photograph of Vehicle' : 'Annexure-III: Photograph of Vehicle (Contd.)'}
                         </div>
                     </div>
                     <img src="AKM Footer.png" class="report-footer-img" alt="Footer" crossorigin="anonymous">
@@ -1327,7 +1327,108 @@
                 }
             }
         }
+
+        //-------newly added ------------------------------
+        let uploadedPhotos = []; 
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderPhotoSheets();
+        });
+
+        document.getElementById('image-uploader').addEventListener('change', function(event) {
+            handleFiles(Array.from(event.target.files));
+        });
+
+        function handleDrop(event) {
+            event.preventDefault();
+            if (event.dataTransfer.files && event.dataTransfer.files.length > 0) {
+                handleFiles(Array.from(event.dataTransfer.files));
+            }
+        }
+
+        function handleFiles(files) {
+            if (files.length === 0) return;
+            files.forEach(file => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    uploadedPhotos.push({
+                        src: e.target.result,
+                        title: file.name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " ")
+                    });
+                    renderPhotoSheets();
+                };
+                reader.readAsDataURL(file);
+            });
+        }
         
+        // Removed the problematic window.deletePhoto function
+
+        window.updatePhotoTitle = function(index, newTitle) {
+            uploadedPhotos[index].title = newTitle;
+        };
+
+        function renderPhotoSheets() {
+            const wrapper = document.getElementById('report-content');
+            
+            // Remove existing photo sheets
+            const existingSheets = document.querySelectorAll('.photo-sheet-dynamic');
+            existingSheets.forEach(sheet => sheet.remove());
+
+            const totalItems = uploadedPhotos.length + 1; 
+            const totalSheets = Math.ceil(totalItems / 2);
+
+            for (let i = 0; i < totalSheets; i++) {
+                const sheet = document.createElement('div');
+                sheet.className = 'sheet photo-sheet-dynamic';
+                
+                sheet.innerHTML = `
+                    <img src="AMK Header.png" class="report-header-img" alt="Header" crossorigin="anonymous">
+                    <div class="sheet-content photo-page-content" id="photo-sheet-content-${i}">
+                        <div class="annexure-header">
+                            ${i === 0 ? 'Annexure-IV: QR Code for Video of Vehicle' : 'Annexure-IV: QR Code for Video of Vehicle (Contd.)'}
+                        </div>
+                    </div>
+                    <img src="AKM Footer.png" class="report-footer-img" alt="Footer" crossorigin="anonymous">
+                `;
+                
+                wrapper.appendChild(sheet);
+                const contentContainer = document.getElementById(`photo-sheet-content-${i}`);
+
+                const startIndex = i * 2;
+                const endIndex = startIndex + 2; 
+                
+                for (let k = startIndex; k < endIndex; k++) {
+                    if (k < uploadedPhotos.length) {
+                        const photo = uploadedPhotos[k];
+                        const slot = document.createElement('div');
+                        slot.className = 'photo-slot';
+                        
+                        // IMPORTANT: Removed onclick and added data-index attribute for delegation
+                        slot.innerHTML = `
+                            <div class="photo-frame">
+                                <img src="${photo.src}" alt="Property Photo">
+                                <button type="button" class="delete-photo-btn" data-index="${k}">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            <input type="text" class="photo-title" value="${photo.title}" oninput="updatePhotoTitle(${k}, this.value)">
+                        `;
+                        contentContainer.appendChild(slot);
+                    } else if (k === uploadedPhotos.length) {
+                        const addSlot = document.createElement('div');
+                        addSlot.className = 'photo-slot';
+                        addSlot.innerHTML = `
+                            <div class="add-photo-placeholder" onclick="document.getElementById('image-uploader').click()" ondragover="event.preventDefault()" ondrop="handleDrop(event)">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Add Photo</p>
+                                <span>(Click or Drag & Drop)</span>
+                            </div>
+                        `;
+                        contentContainer.appendChild(addSlot);
+                    }
+                }
+            }
+        }
         // --- 3B. EVENT DELEGATION FOR DELETE BUTTON (THE FIX) ---
         document.addEventListener('click', function(event) {
             const deleteButton = event.target.closest('.delete-photo-btn');
