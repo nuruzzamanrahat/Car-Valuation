@@ -339,6 +339,13 @@
             white-space: pre-wrap; /* Essential: keeps spaces and allows wrapping */
             word-wrap: break-word;
         }
+        
+        /* Optional: This adds the placeholder back since spans don't have one naturally */
+        .auto-grow:empty:before {
+            content: attr(aria-placeholder);
+            color: #999;
+        }
+        
         /* --- PREVIEW MODE --- */
         body.preview-mode input, 
         body.preview-mode textarea, 
