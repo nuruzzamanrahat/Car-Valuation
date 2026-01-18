@@ -330,7 +330,6 @@
         .auto-grow {
             display: inline; /* Changed from inline-block to allow wrapping */
             border: none;
-            border-bottom: 1px solid #000;
             outline: none;
             font: inherit;
             padding: 0 3px;
@@ -341,9 +340,8 @@
         }
         
         /* Optional: This adds the placeholder back since spans don't have one naturally */
-        .auto-grow:empty:before {
-            content: attr(aria-placeholder);
-            color: #999;
+        .auto-grow:focus {
+            border-bottom: 1px solid #000; /* Line only appears when typing */
         }
         
         /* --- PREVIEW MODE --- */
