@@ -328,6 +328,7 @@
         }
         /* Adjust the text width with the input text */
         .auto-grow {
+            display: inline; /* Changed from inline-block to allow wrapping */
             border: none;
             border-bottom: 1px solid #000;
             outline: none;
@@ -335,6 +336,8 @@
             padding: 0 3px;
             min-width: 2px;
             background: transparent;
+            white-space: pre-wrap; /* Essential: keeps spaces and allows wrapping */
+            word-wrap: break-word;
         }
         /* --- PREVIEW MODE --- */
         body.preview-mode input, 
@@ -1185,28 +1188,18 @@
             document.getElementById('output-recipient-name').innerText = nameInput.value;
             document.getElementById('output-recipient-address').innerText = addressInput.value;
         }
+
         // --- 3. AUTO LENGTH ADJUSTMENT OF USER INPUT LOGIC ---
         document.querySelectorAll('.auto-grow').forEach(input => {
-            const mirror = document.createElement('div');
-            mirror.style.position = 'absolute';
-            mirror.style.top = '-9999px';
-            mirror.style.left = '0';
-            mirror.style.whiteSpace = 'pre';
-            mirror.style.visibility = 'hidden';
-            document.body.appendChild(mirror);
-            function resize() {
-                const style = getComputedStyle(input);
-                mirror.style.font = style.font;
-                mirror.style.letterSpacing = style.letterSpacing;
-                mirror.style.padding = style.padding;
-
-                mirror.textContent = input.value || input.placeholder || '';
-                input.style.width = mirror.scrollWidth + 6 + 'px';
-            }
-            input.addEventListener('input', resize);
-            window.addEventListener('resize', resize);
-            resize();
+            input.addEventListener('paste', function(e) {
+                e.preventDefault();
+                const text = (e.originalEvent || e).clipboardData.getData('text/plain');
+                document.execCommand("insertHTML", false, text);
+            });
         });
+       
+
+
         
         // --- 4. YES-NO CONDITIONAL TEXT BOX EXPANSION LOGIC ---
         document.addEventListener("change", function (e) {
