@@ -1455,13 +1455,9 @@
     </div>
 
     <script>
-        // --- 1. CALCULATIONS ---
         // --- 2. SYNC RECIPIENT INFO ---
-
-        //----------- syncing the row -------------------------
-
-         document.addEventListener('input', function (event) {
-             // 1. Check if the changed element has the 'sync-input' class
+        document.addEventListener('input', function (event) {
+            // 1. Check if the changed element has the 'sync-input' class
              if (event.target.classList.contains('sync-input')) {
       
                  // 2. Get the unique key (e.g., "user-name") and the new value
@@ -1805,6 +1801,7 @@
                 renderPhotoSheets();
             }
         }
+    </script>
 
 //_________WEBHOOK____________
 async function submitReport(data) {
