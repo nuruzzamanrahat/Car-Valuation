@@ -639,25 +639,46 @@
                     </thead>
                     <tbody id="valuation-table">
                         <tr>
-                            <th><input type="number" class="max-price" oninput="calculateValuation()" placeholder="0" style="text-align: center;"></th>
-                            <th><input type="number" class="assesesd-price" oninput="calculateValuation()" placeholder="0" style="text-align: center;"></th>
-                            <th><input type="number" class="forced-sale-value" readonly placeholder="0" style="background: #f9f9f9; text-align: center;"></th>
+                            <th><input type="text" class="max-price" oninput="formatCurrency(this); calculateValuation()" placeholder="0" style="text-align: center;"></th>
+                            <th><input type="text" class="assesesd-price" oninput="formatCurrency(this); calculateValuation()" placeholder="0" style="text-align: center;"></th>
+                            <th><input type="text" class="forced-sale-value" readonly placeholder="0" style="background: #f9f9f9; text-align: center;"></th>
                         </tr>
                     </tbody>
                 </table>
-                <script>
-                    function calculateValuation() {
-                        const rows = document.querySelectorAll("#valuation-table tr");
+<script>
+// Function to add commas as the user types
+function formatCurrency(input) {
+    // Remove all non-numeric characters except decimals
+    let value = input.value.replace(/[^0-9.]/g, '');
+    
+    if (value) {
+        // Convert to number and back to string with commas
+        let parts = value.split('.');
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        input.value = parts.join('.');
+    }
+}
 
-                        rows.forEach(row => {
-                        const maxPrice = parseFloat(row.querySelector(".max-price").value) || 0;
-                        const assessedPrice = parseFloat(row.querySelector(".assesesd-price").value) || 0;
-                        // 20% depreciation on assessed price
-                        const forcedSaleValue = assessedPrice * 0.8;
-                        row.querySelector(".forced-sale-value").value = forcedSaleValue.toFixed(2);
-                        });
-                    }  
-                </script>     
+// Utility function to get the actual number from a comma-separated string
+function getNumber(val) {
+    if (!val) return 0;
+    // Remove commas before doing math
+    return parseFloat(val.toString().replace(/,/g, '')) || 0;
+}
+function calculateValuation() {
+    // Use getNumber to strip commas before calculating
+    const maxPrice = getNumber(document.querySelector('.max-price').value);
+    const assessedPrice = getNumber(document.querySelector('.assesesd-price').value);
+    
+    // Example: Forced Sale Value is 80% of Assessed Price
+    const fsv = assessedPrice * 0.8;
+
+    // Display the result with commas
+    const fsvField = document.querySelector('.forced-sale-value');
+    fsvField.value = fsv.toLocaleString('en-US', { maximumFractionDigits: 2 });
+}
+</script>    
+                
                 <p>As per our understanding, the aforementioned valuation is fair and reasonable and our responsibility is restricted within the physical existence of the used vehicle and the value thereof.</p>
                 <p>The report has been prepared based on our physical inspection, verification, necessary documents as provided by concern office/individual, local market analysis and assessment to the best of our knowledge.</p>
                 <p>For any query, please feel free to contact us.</p>
