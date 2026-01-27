@@ -357,7 +357,7 @@
             display: flex;
             align-items: center;
             gap: 5px;
-            font-size: 14px;
+            font-size: 12px;
             user-select: none;
         }
 
@@ -1443,35 +1443,48 @@ function calculateValuation() {
                         <th style="width: 30%;">Interior Condition</th>
                         <td style="width: 10px;">:</td>
                         <td>
-                            <select>
-                                <option></option>
-                                <option>Good</option>
-                                <option>Average</option>
-                                <option>Poor</option>
-                            </select>
+                            <div class="checkbox-group">
+                                <span class="check-item" onclick="toggleCheck(this)">
+                                    <span class="square"></span> Good
+                                </span>
+                                <span class="check-item" onclick="toggleCheck(this)">
+                                    <span class="square"></span> Average
+                                </span>
+                                <span class="check-item" onclick="toggleCheck(this)">
+                                    <span class="square"></span> Poor
+                                </span>
+                            </div>
                         </td>
                     </tr>
                     <tr>
                         <th style="width: 30%;">Exterior Condition</th>
                         <td style="width: 10px;">:</td>
                         <td>
-                            <select>
-                                <option></option>
-                                <option>Good</option>
-                                <option>Average</option>
-                                <option>Poor</option>
-                            </select>
+                            <div class="checkbox-group">
+                                <span class="check-item" onclick="toggleCheck(this)">
+                                    <span class="square"></span> Good
+                                </span>
+                                <span class="check-item" onclick="toggleCheck(this)">
+                                    <span class="square"></span> Average
+                                </span>
+                                <span class="check-item" onclick="toggleCheck(this)">
+                                    <span class="square"></span> Poor
+                                </span>
+                            </div>
                         </td>
                     </tr>
                     <tr>
                         <th style="width: 30%;">Any known defaults</th>
                         <td style="width: 10px;">:</td>
                         <td>
-                            <select class="yes-no-select" data-target="known_default_detail">
-                                <option value=""></option>
-                                <option value="yes">Yes</option>
-                                <option value="no">No</option>
-                            </select>
+                            <div class="checkbox-group">
+                                <span class="check-item" onclick="toggleCheck(this); document.getElementById('known_default_detail').style.display='none'">
+                                    <span class="square"></span> No
+                                </span>
+                                <span class="check-item" onclick="toggleCheck(this); document.getElementById('known_default_detail').style.display='block'">
+                                    <span class="square"></span> Yes
+                                </span>
+                            </div>
                             
                             <textarea
                                 id="known_default_detail"
@@ -1515,12 +1528,12 @@ function calculateValuation() {
                 <div style="height: 20px;"></div>
                 <h2>Overall Assessment</h2>
                 <ol>
-                    <li>The valuation has been performed based on our physical inspection, verification, local market analysis and assessment to the best of our knowledge and all the information provided in this report is based on the vehicle related documents, other necessary documents and information as provided by concern Bank/NBFI/Office/Officials/Vehicle Owner/Borrower/Individual.</li>
-                    <li>AMK’s responsibility is limited to the valuation of the said vehicle only without considering any legal matter related to the vehicle and documents as well.</li>
-                    <li>Except inspection and valuation of the said vehicle, AMK or any of its Official has no interest directly or indirectly, at present or in future in any manner whatsoever in the subject matter of this report.</li>
-                    <li>In case of Forced Sale Value, the rate is assumed on the basis of the vehicle’s demand, price, marketability and other factors which may have relation to unforeseen or uncontrollable event that drives to sell the vehicle within a short duration.</li>
-                    <li>This report is not intended to absolve the concerned parties from their contractual obligations.</li>
-                    <li>The report is duly signed by the authorized signatories of AMK and it contains 13 (Thirteen) pages.</li>
+                    <li><p>The valuation has been performed based on our physical inspection, verification, local market analysis and assessment to the best of our knowledge and all the information provided in this report is based on the vehicle related documents, other necessary documents and information as provided by concern Bank/NBFI/Office/Officials/Vehicle Owner/Borrower/Individual.</p></li>
+                    <li><p>AMK’s responsibility is limited to the valuation of the said vehicle only without considering any legal matter related to the vehicle and documents as well.</li>
+                    <li><p>Except inspection and valuation of the said vehicle, AMK or any of its Official has no interest directly or indirectly, at present or in future in any manner whatsoever in the subject matter of this report.</p></li>
+                    <li><p>In case of Forced Sale Value, the rate is assumed on the basis of the vehicle’s demand, price, marketability and other factors which may have relation to unforeseen or uncontrollable event that drives to sell the vehicle within a short duration.</p></li>
+                    <li><p>This report is not intended to absolve the concerned parties from their contractual obligations.</p></li>
+                    <li><p>The report is duly signed by the authorized signatories of AMK and it contains 13 (Thirteen) pages.</p></li>
                 </ol>      
             </div>
 
