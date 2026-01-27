@@ -1841,5 +1841,19 @@ async function submitReport(data) {
   }
 }
 //____________________________
+    aEt4EHGXNdqZDxkCqP8KHL
+    b49148a3e48b3d5af778c34f91552f3d57213d4f
+
+    async function getKoboData() {
+  // We point this to an n8n "Webhook" node that is set to GET
+  const response = await fetch("https://amkadvisory.app.n8n.cloud/webhook/get-kobo-data");
+  const reportData = await response.json();
+
+  // This part would "fill up" your HTML fields automatically
+  document.getElementById('client_name').value = reportData.name;
+  document.getElementById('observation').value = reportData.notes;
+  
+  alert("Data pulled from Kobo! You can now edit.");
+}
 </body>
 </html>
