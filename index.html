@@ -344,6 +344,48 @@
         .add-slot-btn:hover {
             background-color: #2980b9;
         }
+        
+        /* --- CHECK BOX FOR ROW --- */
+        .checkbox-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .check-item {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+            user-select: none;
+        }
+
+        /* The box before the text */
+        .square {
+            width: 14px;
+            height: 14px;
+            border: 1px solid #000;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        /* When checked, add a tick mark */
+        .check-item.checked .square::after {
+            content: "✓";
+            color: #000;
+        }
+        
+        /* Ensure colors are black for printing */
+        @media print {
+            .square {
+                border: 1px solid #000 !important;
+                -webkit-print-color-adjust: exact;
+            }
+        }
                     
 
         /* DELETE BUTTON STYLES FIXED */
@@ -840,14 +882,27 @@ function calculateValuation() {
                             </select>
                         </td>
                     </tr>
-                    <tr>
+                    <tr>
                         <th style="width: 30%;">Fuel used</th>
                         <td style="width: 10px;">:</td>
-                        <td style="display: flex; flex-wrap: wrap; gap: 10px;">
-                            <label><input type="checkbox" name="fuel" value="Octane"> Octane</label>
-                            <label><input type="checkbox" name="fuel" value="Diesel"> Diesel</label>
-                            <label><input type="checkbox" name="fuel" value="CNG"> CNG</label>
-                            <label><input type="checkbox" name="fuel" value="LPG"> LPG</label>
+                        <td>
+                            <div class="checkbox-group">
+                                <span class="check-item" onclick="toggleCheck(this)">
+                                    <span class="square"></span> Octane
+                                </span>
+                                <span class="check-item" onclick="toggleCheck(this)">
+                                    <span class="square"></span> Diesel
+                                </span>
+                                <span class="check-item" onclick="toggleCheck(this)">
+                                    <span class="square"></span> CNG
+                                </span>
+                                <span class="check-item" onclick="toggleCheck(this)">
+                                    <span class="square"></span> LPG
+                                </span>
+                                <span class="check-item" onclick="toggleCheck(this)">
+                                    <span class="square"></span> Hybrid
+                                </span>
+                            </div>
                         </td>
                     </tr>
                 </table>
@@ -933,144 +988,184 @@ function calculateValuation() {
                         <th style="width: 30%;">Transmission (Gear)</th>
                         <td style="width: 10px;">:</td>
                         <td>
-                            <select>
-                                <option></option>
-                                <option>Auto</option>
-                                <option>Manual</option>
-                            </select>
+                            <div class="checkbox-group">
+                                <span class="check-item" onclick="toggleCheck(this)">
+                                    <span class="square"></span> Auto
+                                </span>
+                                <span class="check-item" onclick="toggleCheck(this)">
+                                    <span class="square"></span> Manual
+                                </span>
+                            </div>
                         </td>
                     </tr>
                     <tr>
                         <th style="width: 30%;">Ignition (Start)</th>
                         <td style="width: 10px;">:</td>
                         <td>
-                            <select>
-                                <option></option>
-                                <option>key</option>
-                                <option>Push</option>
-                            </select>
+                            <div class="checkbox-group">
+                                <span class="check-item" onclick="toggleCheck(this)">
+                                    <span class="square"></span> Key
+                                </span>
+                                <span class="check-item" onclick="toggleCheck(this)">
+                                    <span class="square"></span> Push
+                                </span>
+                            </div>
                         </td>
                     </tr>
                     <tr>
                         <th style="width: 30%;">Power window</th>
                         <td style="width: 10px;">:</td>
                         <td>
-                            <select>
-                                <option></option>
-                                <option >Auto</option>
-                                <option>Manual</option>
-                            </select>
+                            <div class="checkbox-group">
+                                <span class="check-item" onclick="toggleCheck(this)">
+                                    <span class="square"></span> Auto
+                                </span>
+                                <span class="check-item" onclick="toggleCheck(this)">
+                                    <span class="square"></span> Manual
+                                </span>
+                            </div>
                         </td>
                     </tr>
                     <tr>
                         <th style="width: 30%;">Power Steering</th>
                         <td style="width: 10px;">:</td>
                         <td>
-                            <select>
-                                <option></option>
-                                <option>Auto</option>
-                                <option>Manual</option>
-                            </select>
+                            <div class="checkbox-group">
+                                <span class="check-item" onclick="toggleCheck(this)">
+                                    <span class="square"></span> Auto
+                                </span>
+                                <span class="check-item" onclick="toggleCheck(this)">
+                                    <span class="square"></span> Manual
+                                </span>
+                            </div>
                         </td>
-                    </tr><tr>
+                    </tr>
+                    <tr>
                         <th style="width: 30%;">Power Side Mirror</th>
                         <td style="width: 10px;">:</td>
                         <td>
-                            <select>
-                                <option></option>
-                                <option>Auto</option>
-                                <option>Manual</option>
-                            </select>
+                            <div class="checkbox-group">
+                                <span class="check-item" onclick="toggleCheck(this)">
+                                    <span class="square"></span> Auto
+                                </span>
+                                <span class="check-item" onclick="toggleCheck(this)">
+                                    <span class="square"></span> Manual
+                                </span>
+                            </div>
                         </td>
                     </tr>
                     <tr>
                         <th style="width: 30%;">Power Door Locks</th>
                         <td style="width: 10px;">:</td>
                         <td>
-                            <select>
-                                <option></option>
-                                <option>Yes</option>
-                                <option>No</option>
-                            </select>
+                            <div class="checkbox-group">
+                                <span class="check-item" onclick="toggleCheck(this)">
+                                    <span class="square"></span> Yes
+                                </span>
+                                <span class="check-item" onclick="toggleCheck(this)">
+                                    <span class="square"></span> No
+                                </span>
+                            </div>
                         </td>
                     </tr>
                     <tr>
                         <th style="width: 30%;">Sound System</th>
                         <td style="width: 10px;">:</td>
                         <td>
-                            <select>
-                                <option></option>
-                                <option>Built-in</option>
-                                <option>Modified</option>
-                            </select>
+                            <div class="checkbox-group">
+                                <span class="check-item" onclick="toggleCheck(this)">
+                                    <span class="square"></span> Built-in
+                                </span>
+                                <span class="check-item" onclick="toggleCheck(this)">
+                                    <span class="square"></span> Modified
+                                </span>
+                            </div>
                         </td>
                     </tr>
                     <tr>
                         <th style="width: 30%;">Wooden Panel</th>
                         <td style="width: 10px;">:</td>
                         <td>
-                            <select>
-                                <option></option>
-                                <option >Yes</option>
-                                <option>No</option>
-                            </select>
+                            <div class="checkbox-group">
+                                <span class="check-item" onclick="toggleCheck(this)">
+                                    <span class="square"></span> Yes
+                                </span>
+                                <span class="check-item" onclick="toggleCheck(this)">
+                                    <span class="square"></span> No
+                                </span>
+                            </div>
                         </td>
                     </tr>
                     <tr>
                         <th style="width: 30%;">Leather Interior</th>
                         <td style="width: 10px;">:</td>
                         <td>
-                            <select>
-                                <option></option>
-                                <option >Yes</option>
-                                <option>No</option>
-                            </select>
+                            <div class="checkbox-group">
+                                <span class="check-item" onclick="toggleCheck(this)">
+                                    <span class="square"></span> Yes
+                                </span>
+                                <span class="check-item" onclick="toggleCheck(this)">
+                                    <span class="square"></span> No
+                                </span>
+                            </div>
                         </td>
                     </tr>
                     <tr>
                         <th style="width: 30%;">Airbag</th>
                         <td style="width: 10px;">:</td>
                         <td>
-                            <select>
-                                <option></option>
-                                <option >Yes</option>
-                                <option>No</option>
-                            </select>
+                            <div class="checkbox-group">
+                                <span class="check-item" onclick="toggleCheck(this)">
+                                    <span class="square"></span> Yes
+                                </span>
+                                <span class="check-item" onclick="toggleCheck(this)">
+                                    <span class="square"></span> No
+                                </span>
+                            </div>
                         </td>
                     </tr>
                     <tr>
                         <th style="width: 30%;">Back Camera</th>
                         <td style="width: 10px;">:</td>
                         <td>
-                            <select>
-                                <option></option>
-                                <option >Yes</option>
-                                <option>No</option>
-                            </select>
+                            <div class="checkbox-group">
+                                <span class="check-item" onclick="toggleCheck(this)">
+                                    <span class="square"></span> Yes
+                                </span>
+                                <span class="check-item" onclick="toggleCheck(this)">
+                                    <span class="square"></span> No
+                                </span>
+                            </div>
                         </td>
                     </tr>
                     <tr>
                         <th style="width: 30%;">Ambient Lighting</th>
                         <td style="width: 10px;">:</td>
                         <td>
-                            <select>
-                                <option></option>
-                                <option>Built-in</option>
-                                <option>Modified</option>
-                            </select>
+                            <div class="checkbox-group">
+                                <span class="check-item" onclick="toggleCheck(this)">
+                                    <span class="square"></span> Built-in
+                                </span>
+                                <span class="check-item" onclick="toggleCheck(this)">
+                                    <span class="square"></span> Modified
+                                </span>
+                            </div>
                         </td>
                     </tr>
                     <tr>
                         <th style="width: 30%;">Additional Accessories</th>
                         <td style="width: 10px;">:</td>
                         <td>
-                            <select>
-                                <option></option>
-                                <option >Yes</option>
-                                <option>No</option>
-                            </select>
+                            <div class="checkbox-group">
+                                <span class="check-item" onclick="toggleCheck(this)">
+                                    <span class="square"></span> Yes
+                                </span>
+                                <span class="check-item" onclick="toggleCheck(this)">
+                                    <span class="square"></span> No
+                                </span>
+                            </div>
                         </td>
-                    </tr>
+                    </tr> 
                     <tr>
                         <th style="width: 30%;">No. of Seats</th>
                         <td style="width: 10px;">:</td>
@@ -1878,6 +1973,24 @@ function calculateValuation() {
                 uploadedPhotos = [];
                 renderPhotoSheets();
             }
+        }
+
+        //--------- CHECK BOX LOGIC ----------//
+        function toggleCheck(element) {
+            // Toggle the 'checked' class on the clicked item
+            element.classList.toggle('checked');
+        }
+        function toggleCheck(element) {
+            // Find all items in the same row/group
+            const parent = element.parentElement;
+            const items = parent.querySelectorAll('.check-item');
+            // Remove check from others
+            items.forEach(item => {
+                if (item !== element) item.classList.remove('checked');
+            });
+    
+            // Toggle the clicked one
+            element.classList.toggle('checked');
         }
         //_________WEBHOOK____________
         async function submitReport(data) {
