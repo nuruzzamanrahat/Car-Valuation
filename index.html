@@ -161,16 +161,34 @@
             font-weight: bold;
             text-align: center;
         }
-        
         /* Input Styles */
-        input[type="text"], input[type="date"],input[type="time"] input[type="number"], textarea, select {
+        input[type="text"], 
+        input[type="date"], 
+        input[type="time"], 
+        input[type="number"], 
+        textarea, 
+        select {
             width: 100%;
             padding: 2px;
             border: 1px solid #ccc;
             border-radius: 2px;
-            font-family: Book Antiqua;
+            font-family: 'Book Antiqua', 'Palatino Linotype', 'Palatino', serif;
             font-size: 12px;
             background-color: #fff;
+            outline: none;
+        }
+
+        /* Force font for Date and Time internal fields (Chrome/Edge/Safari) */
+        input[type="date"]::-webkit-datetime-edit,
+        input[type="date"]::-webkit-calendar-picker-indicator,
+        input[type="time"]::-webkit-datetime-edit,
+        input[type="time"]::-webkit-datetime-edit-fields-wrapper,
+        input[type="time"]::-webkit-datetime-edit-text,
+        input[type="time"]::-webkit-datetime-edit-minute,
+        input[type="time"]::-webkit-datetime-edit-hour,
+        input[type="time"]::-webkit-datetime-edit-ampm-block {
+            font-family: 'Book Antiqua', 'Palatino Linotype', 'Palatino', serif;
+            font-size: 12px;
         }
 
         input:focus, textarea:focus, select:focus {
@@ -1410,11 +1428,11 @@ function calculateValuation() {
                         <td style="width: 10px;">:</td>
                         <td>
                             <div class="checkbox-group">
-                                <span class="check-item" onclick="toggleCheck(this); document.getElementById('accessories_detail').style.display='none'">
-                                    <span class="square"></span> No
-                                </span>
                                 <span class="check-item" onclick="toggleCheck(this); document.getElementById('accessories_detail').style.display='block'">
                                     <span class="square"></span> Yes
+                                </span>
+                                <span class="check-item" onclick="toggleCheck(this); document.getElementById('accessories_detail').style.display='none'">
+                                    <span class="square"></span> No
                                 </span>
                             </div>
                             <textarea
@@ -1477,12 +1495,12 @@ function calculateValuation() {
                         <th style="width: 30%;">Any known defaults</th>
                         <td style="width: 10px;">:</td>
                         <td>
-                            <div class="checkbox-group">
-                                <span class="check-item" onclick="toggleCheck(this); document.getElementById('known_default_detail').style.display='none'">
-                                    <span class="square"></span> No
-                                </span>
+                            <div class="checkbox-group"
                                 <span class="check-item" onclick="toggleCheck(this); document.getElementById('known_default_detail').style.display='block'">
                                     <span class="square"></span> Yes
+                                </span>                                
+                                <span class="check-item" onclick="toggleCheck(this); document.getElementById('known_default_detail').style.display='none'">
+                                    <span class="square"></span> No
                                 </span>
                             </div>
                             
