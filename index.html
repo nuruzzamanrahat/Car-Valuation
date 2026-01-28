@@ -143,10 +143,11 @@
         /* Table Styles */
         table {
             width: 100%;
+            table-layout: fixed; /**------------------------------**/
             border-collapse: collapse;
-            table-layout: fixed;
             margin: 5px 0;
             font-size: 12px;
+            word-wrap: break-word;  /**------------------------------**/
         }
         
         table, th, td {
@@ -157,7 +158,6 @@
             padding: 2px;
             text-align: left;
             vertical-align: middle;
-            word-wrap: break-word;
         }
         
         th {
