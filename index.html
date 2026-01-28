@@ -923,6 +923,12 @@ function calculateValuation() {
                             </div>
                         </td>
                     </tr>
+                    <script>
+                        function toggleCheck(element) {
+                        // Toggle the 'checked' class on the clicked item
+                        element.classList.toggle('checked');
+                    }
+                    </script>
                 </table>
                 <div style="height: 20px;"></div>
                 <h2>Registration Details</h2>
@@ -1755,9 +1761,6 @@ function calculateValuation() {
             });
         });
        
-
-
-        
         // --- 4. YES-NO CONDITIONAL TEXT BOX EXPANSION LOGIC ---
         document.addEventListener("change", function (e) {
             if (e.target.classList.contains("yes-no-select")) {
