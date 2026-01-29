@@ -141,22 +141,26 @@
         }
         
         /* Table Styles */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 5px 0;
-            font-size: 12px;
-        }
+/* Force the table to respect the container width */
+table {
+    width: 100%;
+    table-layout: fixed; /* This is the key: forces columns to stay within bounds */
+    border-collapse: collapse;
+    word-wrap: break-word; /* Ensures long words break to the next line */
+}
         
         table, th, td {
             border: 1px solid #000;
         }
         
-        th, td {
-            padding: 2px;
-            text-align: left;
-            vertical-align: middle;
-        }
+/* Ensure cells wrap text and handle long inputs */
+td, th {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal; /* Allows text to wrap to multiple lines */
+    vertical-align: top;
+    padding: 8px;
+}
         
         th {
             font-weight: bold;
@@ -191,6 +195,19 @@
             font-family: 'Book Antiqua', 'Palatino Linotype', 'Palatino', serif;
             font-size: 12px;
         }
+
+/* If you are using <input> or <textarea> inside these tables */
+table input, table textarea {
+    width: 100%;
+    box-sizing: border-box;
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: inherit;
+    resize: none; /* Disables manual resizing for textareas */
+}
+
+        
 
         input:focus, textarea:focus, select:focus {
             border-color: #2196F3;
