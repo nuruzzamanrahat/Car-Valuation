@@ -141,26 +141,26 @@
         }
         
         /* Table Styles */
-/* Force the table to respect the container width */
-table {
-    width: 100%;
-    table-layout: fixed; /* This is the key: forces columns to stay within bounds */
-    border-collapse: collapse;
-    word-wrap: break-word; /* Ensures long words break to the next line */
-}
+        table {
+            width: 100%;
+            table-layout: fixed; /* This is the key: forces columns to stay within bounds <--------------------new------------*/
+            border-collapse: collapse;
+            margin: 5px 0;
+            font-size: 12px;
+            word-wrap: break-word; /* Ensures long words break to the next line <--------------------new------------ */
+        }
         
         table, th, td {
             border: 1px solid #000;
         }
-        
-/* Ensure cells wrap text and handle long inputs */
-td, th {
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    white-space: normal; /* Allows text to wrap to multiple lines */
-    vertical-align: top;
-    padding: 8px;
-}
+        th, td {
+            word-wrap: break-word; /*<--------------------new------------ */
+            overflow-wrap: break-word; /*<--------------------new------------ */
+            white-space: normal; /* Allows text to wrap to multiple lines <--------------------new------------ */*/
+            padding: 2px;
+            text-align: left;
+            vertical-align: middle;
+        }
         
         th {
             font-weight: bold;
