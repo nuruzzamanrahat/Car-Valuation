@@ -1148,6 +1148,27 @@ function calculateValuation() {
                         </td>
                     </tr>
                     <tr>
+                        <th style="width: 30%;">Air Condition</th>
+                        <td style="width: 10px;">:</td>
+                        <td>
+                            <div class="checkbox-group">
+                                <span class="check-item" onclick="toggleCheck(this)">
+                                    <span class="square"></span> Good
+                                </span>
+                                <span class="check-item" onclick="toggleCheck(this)">
+                                    <span class="square"></span> Fair
+                                </span>
+                                <span class="check-item" onclick="toggleCheck(this)">
+                                    <span class="square"></span> Moderate
+                                </span>
+                                <span class="check-item" onclick="toggleCheck(this)">
+                                    <span class="square"></span> Poor
+                                </span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                    <tr>
                         <th style="width: 30%;">Back Camera</th>
                         <td style="width: 10px;">:</td>
                         <td>
@@ -1180,13 +1201,20 @@ function calculateValuation() {
                         <td style="width: 10px;">:</td>
                         <td>
                             <div class="checkbox-group two-cols">
-                                <span class="check-item" onclick="toggleCheck(this)">
+                                <span class="check-item" onclick="toggleCheck(this); document.getElementById('accessories_detail').style.display='block'">
                                     <span class="square"></span> Yes
                                 </span>
-                                <span class="check-item" onclick="toggleCheck(this)">
+                                <span class="check-item" onclick="toggleCheck(this); document.getElementById('accessories_detail').style.display='none'">
                                     <span class="square"></span> No
                                 </span>
                             </div>
+                            <textarea
+                                id="accessories_detail"
+                                name="accessories_detail"
+                                placeholder="Please describe"
+                                rows="2"
+                                style="width:100%; display:none; margin-top:5px;"
+                                ></textarea>
                         </td>
                     </tr> 
                     <tr>
@@ -1200,7 +1228,8 @@ function calculateValuation() {
                         <td><input type="text" placeholder=""></td>
                     </tr>
                 </table>
-                <div style="height: 20px;"></div>
+                <div class="note">
+                        <p><strong>Encl:</strong><textarea></textarea></p>
                 <table>
                     <tr><th colspan="2">Exterior</th><th>Option/Features</th></tr>
                     <tr>
@@ -1262,6 +1291,11 @@ function calculateValuation() {
                                 </span>
                             </div>
                         </td>
+                    </tr>
+                    <tr>
+                        <th style="width: 30%;">Tires Usage Time</th>
+                        <td style="width: 10px;">:</td>
+                        <td><input type="text" placeholder=""></td>
                     </tr>
                     <tr>
                         <th style="width: 30%;">Paint Condition</th>
